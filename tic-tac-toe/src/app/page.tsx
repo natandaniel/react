@@ -20,7 +20,7 @@ export default function Game() {
   const moves = history.map((squares: string[], move: number) => {
     let description;
     if (move > 0) {
-      description = "Go to move #" + (move + 1);
+      description = "Go to move #" + move;
     } else {
       description = "Go to game start";
     }
