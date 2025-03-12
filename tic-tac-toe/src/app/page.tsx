@@ -1,39 +1,83 @@
 "use client";
 import { useState } from "react";
 
-export default function Board() {
-  const [lastMove, setLastMove] = useState("");
-  const [squares, setSquares] = useState(Array(9).fill(""));
+export default function Game() {
+  const [history, setHistory] = useState([Array(9).fill("")]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares = history[currentMove];
 
-  const winner = calculateWinner(squares);
-  let displayedMsg;
-
-  if (winner) {
-    displayedMsg = "Winner: " + winner;
-  } else {
-    displayedMsg = "Next player: " + (lastMove === "X" ? "O" : "X");
+  function handlePlay(nextSquares: string[]) {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
   }
 
+  function jumpTo(nextMove: number) {
+    setCurrentMove(nextMove);
+  }
+
+  const moves = history.map((squares: string[], move: number) => {
+    let description;
+    if (move > 0) {
+      description = "Go to move #" + (move + 1);
+    } else {
+      description = "Go to game start";
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
+      </div>
+    </div>
+  );
+}
+
+function Board({
+  xIsNext,
+  squares,
+  onPlay,
+}: {
+  xIsNext: boolean;
+  squares: string[];
+  onPlay: (nextSquares: string[]) => void;
+}) {
   function handleClick(i: number) {
-    if (squares[i]) {
+    if (calculateWinner(squares) || squares[i]) {
       return;
     }
 
     const nextSquares = squares.slice();
-
-    if (lastMove === "X") {
-      nextSquares[i] = "O";
-    } else {
+    if (xIsNext) {
       nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
     }
 
-    setLastMove(nextSquares[i]);
-    setSquares(nextSquares);
+    onPlay(nextSquares);
+  }
+
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
     <>
-      <div className="status">{displayedMsg}</div>
+      <div className="status">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
