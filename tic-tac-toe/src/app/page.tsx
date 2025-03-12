@@ -1,3 +1,5 @@
+'use client';
+
 export default function Board() {
   return (
     <>
@@ -21,5 +23,13 @@ export default function Board() {
 }
 
 function Square({ value }: { value: string }) {
-  return <button className="square">{value}</button>;
+  function handleClick() {
+    console.log("clicked!");
+  }
+
+  return (
+    <button className="square" onClick={handleClick}>
+      {value}
+    </button>
+  );
 }
