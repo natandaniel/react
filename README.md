@@ -193,3 +193,59 @@ This section provides a brief overview of essential React concepts:
    ```
 
 For more detailed explanations, visit the [React Learning Guide](https://react.dev/learn).
+
+## Thinking in React
+
+React encourages a component-based approach to building UIs. Here's a summary of the process:
+
+1. **Start with a Mockup**:
+
+   - Begin with a mockup and a JSON API that provides the data.
+
+2. **Break the UI into a Component Hierarchy**:
+
+   - Identify components and subcomponents in the mockup. Use principles like the single responsibility principle to decide component boundaries.
+   - Example hierarchy:
+     - `FilterableProductTable`
+       - `SearchBar`
+       - `ProductTable`
+         - `ProductCategoryRow`
+         - `ProductRow`
+
+3. **Build a Static Version in React**:
+
+   - Create a non-interactive version of the UI using components and props. Avoid using state at this stage.
+   - Example:
+     ```jsx
+     function ProductCategoryRow({ category }) {
+       return (
+         <tr>
+           <th colSpan="2">{category}</th>
+         </tr>
+       );
+     }
+     ```
+
+4. **Identify the Minimal Representation of UI State**:
+
+   - Determine the minimal set of mutable state your app needs.
+
+5. **Identify Where Your State Should Live**:
+
+   - Decide which component should own the state. Often, it's the common ancestor of components that need the state.
+
+6. **Add Inverse Data Flow**:
+   - Allow child components to update the state in parent components by passing down functions as props.
+   - Example:
+     ```jsx
+     function SearchBar({ filterText, onFilterTextChange }) {
+       return (
+         <input
+           value={filterText}
+           onChange={(e) => onFilterTextChange(e.target.value)}
+         />
+       );
+     }
+     ```
+
+For a detailed guide, visit the [Thinking in React Guide](https://react.dev/learn/thinking-in-react).
