@@ -35,52 +35,6 @@ This repository contains a collection of examples showcasing React, a popular Ja
 
 For more detailed instructions, visit the [React Editor Setup Guide](https://react.dev/learn/editor-setup).
 
-## Using TypeScript
-
-TypeScript is a popular way to add type definitions to JavaScript codebases, and Next.js offers excellent support for it.
-
-### Adding TypeScript to an existing Next.js Project
-
-1. **Install TypeScript and Type Definitions**:
-
-   Run the following command to install TypeScript and the necessary type definitions for React:
-
-   ```bash
-   npm install --save-dev typescript @types/react @types/react-dom
-   ```
-
-2. **Create a `tsconfig.json` File**:
-
-   Next.js will automatically create a `tsconfig.json` file for you when you run the development server for the first time after adding TypeScript. You can customize it as needed. Ensure the following options are set:
-
-   ```json
-   {
-     "compilerOptions": {
-       "target": "es5",
-       "lib": ["dom", "dom.iterable", "esnext"],
-       "allowJs": true,
-       "skipLibCheck": true,
-       "strict": true,
-       "forceConsistentCasingInFileNames": true,
-       "noEmit": true,
-       "esModuleInterop": true,
-       "module": "esnext",
-       "moduleResolution": "node",
-       "resolveJsonModule": true,
-       "isolatedModules": true,
-       "jsx": "preserve"
-     },
-     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-     "exclude": ["node_modules"]
-   }
-   ```
-
-3. **Rename Files to `.tsx`**:
-
-   Ensure that all files containing JSX use the `.tsx` extension. This tells TypeScript that the file contains JSX.
-
-For more detailed instructions, visit the [React TypeScript Guide](https://react.dev/learn/typescript).
-
 ## React Developer Tools
 
 React Developer Tools is a powerful tool for inspecting React components, editing props and state, and identifying performance issues.
