@@ -1,7 +1,6 @@
 # React Learning Examples
 
-This repository contains a collection of examples showcasing React, a popular JavaScript library for building user interfaces.
-Samples use the Next.js React framework.
+This repository contains a collection of examples showcasing React, a popular JavaScript library for building user interfaces. Samples use the Next.js React framework and are created using `create-next-app@latest`.
 
 ## Setting Up VSCode
 
